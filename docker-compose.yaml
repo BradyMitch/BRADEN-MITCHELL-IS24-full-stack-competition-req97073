@@ -1,0 +1,47 @@
+services:
+  ##### FRONTEND (NodeJS React) #####
+  frontend:
+    container_name: braden-frontend
+    tty: true
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    networks:
+      - braden-network
+    ports:
+      - 8000:8000
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on: # Depends on backend to be running and healthy before starting.
+      backend:
+        condition: service_healthy
+
+  ##### BACKEND (NodeJS Express API) #####
+  backend:
+    container_name: braden-backend
+    tty: true
+    init: true # Properly handles running as PID 1 inside a container. Source: https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+    restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "node", "/app/healthcheck.js"] # Check health endpoint for healthy service.
+      interval: 30s # Perform the health check every 30 seconds.
+      timeout: 10s # Consider the health check a failure if it takes more than 10 seconds.
+      retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    networks:
+      - braden-network
+    ports:
+      - 8008:8008
+    volumes:
+      - ./backend:/app
+    environment:
+      - PORT=8008
+      - FRONTEND_URL=http://localhost:8000
+      - BACKEND_URL=http://localhost:8008
+
+networks:
+  braden-network:
+    driver: "bridge" # Internal network that allows containers to communicate with each other.

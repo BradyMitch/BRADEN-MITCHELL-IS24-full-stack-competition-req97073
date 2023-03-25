@@ -1,0 +1,13 @@
+{
+  "name": "is24-full-stack-competition",
+  "version": "1.0.0",
+  "description": "IS24 Full Stack Competition Submission",
+  "author": "Braden Mitchell",
+  "license": "ISC",
+  "scripts": {
+    "init": "cd frontend && npm i && cd ../backend && npm i",
+    "up": "docker compose up -d",
+    "down": "docker compose down",
+    "prune": "docker compose down --rmi all --volumes"
+  }
+}
