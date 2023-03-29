@@ -35,13 +35,13 @@ const OPENAPI_OPTIONS = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'IS24 Full Stack Competition Submission',
+      title: 'CITZ, IMB Product Catalog',
       version: '1.0.0',
       description: 'by Braden Mitchell',
     },
-    servers: [{ url: BACKEND_URL }],
+    servers: [{ url: `${BACKEND_URL}/api` }],
   },
-  apis: ['./routes/*.yaml'],
+  apis: ['./src/routes/*.yaml'],
 };
 
 // Exported configuration values.

@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { healthController } from '../controllers';
+const { isHealthy } = healthController;
 
 /**
  * Check if application is healthy.
@@ -9,6 +10,6 @@ import { healthController } from '../controllers';
  * @method GET
  * @route /api/health
  */
-router.get('/', healthController.isHealthy);
+router.get('/', isHealthy);
 
 export default router;

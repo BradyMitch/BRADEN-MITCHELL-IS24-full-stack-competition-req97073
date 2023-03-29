@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import * as routers from './src/routes';
-import * as middleware from './src/middleware';
 
 import config from './config';
 const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = config;
@@ -14,7 +13,7 @@ const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = confi
 const app = express();
 
 // Swagger OpenAPI configuration.
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS)));
+app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS)));
 
 /**
  * Middleware for parsing request bodies.
@@ -30,6 +29,7 @@ app.use(rateLimit(RATE_LIMIT_OPTIONS));
 
 // Routing
 app.use('/api/health', routers.healthRouter);
+app.use('/api/products', routers.productRouter);
 
 // Display message on index page.
 app.use('/', (req, res) =>
@@ -49,9 +49,5 @@ app.use('/', (req, res) =>
     </html>`,
   ),
 );
-
-// Error handling middleware.
-// Must be placed after routing so it catches all errors.
-app.use(middleware.errorHandler);
 
 export default app;

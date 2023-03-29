@@ -4,7 +4,7 @@
   "main": "index.ts",
   "license": "ISC",
   "scripts": {
-    "dev": "nodemon -L --exec ts-node index.ts"
+    "dev": "nodemon -L --ignore src/data/products.json --exec ts-node index.ts"
   },
   "dependencies": {
     "body-parser": "1.20.2",
