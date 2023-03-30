@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { errorWrapper, productManager } from '../utils';
+import { Product } from '../utils/productManager';
 
 const { getProducts, addProduct, removeProduct, replaceProduct } = productManager;
 
@@ -80,19 +81,13 @@ export const editProduct = errorWrapper(async (req: Request, res: Response) => {
     return;
   }
 
-  // Check for product with productID.
-  const oldProduct = products.find((product) => product.productId === Number(productId));
-  if (!oldProduct) {
-    res.status(404).send(`Product with ID ${productId} was not found.`); // NOT FOUND
-    return;
-  }
-
   // Replace product properties with new properties (filtered to remove productId).
   const filteredReqBody = Object.fromEntries(
     Object.entries(req.body).filter(([key]) => key !== 'productId'),
   );
+  const oldProduct = products.find((product) => product.productId === Number(productId));
   const newProduct = { ...oldProduct, ...filteredReqBody };
-  await replaceProduct(Number(productId), newProduct);
+  await replaceProduct(Number(productId), newProduct as Product);
 
   // Send new product JSON.
   res.status(201).json(newProduct); // SUCCESS

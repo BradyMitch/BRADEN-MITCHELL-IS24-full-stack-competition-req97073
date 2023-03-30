@@ -11,7 +11,7 @@ const PageLayout = (props: IPageLayout) => {
   return (
     <Container
       sx={{
-        width: '1096px !important',
+        width: '100% !important',
         minHeight: '86.8vh',
         display: 'flex',
         justifyContent: 'center',
