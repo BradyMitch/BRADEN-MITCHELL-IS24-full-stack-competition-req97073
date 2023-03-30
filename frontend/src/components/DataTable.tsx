@@ -7,6 +7,7 @@ interface IDataTable {
   rows: object[];
   pageSize?: number;
   height?: string | number;
+  checkboxSelection?: boolean;
 }
 
 /**
@@ -17,9 +18,10 @@ interface IDataTable {
  * @param {object[]} props.rows - Definitions of the table rows.
  * @param {number} props.pageSize - (optional) How many items to display per page.
  * @param {string | number} props.height - (optional) Custom height of the DataTable.
+ * @param {boolean} props.checkboxSelection - (optional) If checkbox selection should be enabled.
  */
 const DataTable = (props: IDataTable) => {
-  const { cols, rows, pageSize = 10, height = 630 } = props;
+  const { cols, rows, pageSize = 10, height = 630, checkboxSelection = false } = props;
   return (
     <Box sx={{ height, width: '100%' }}>
       <DataGrid
@@ -33,7 +35,7 @@ const DataTable = (props: IDataTable) => {
           },
         }}
         pageSizeOptions={[pageSize]}
-        checkboxSelection
+        checkboxSelection={checkboxSelection}
         disableRowSelectionOnClick
       />
     </Box>

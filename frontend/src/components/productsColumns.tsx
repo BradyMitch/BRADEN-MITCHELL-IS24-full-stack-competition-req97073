@@ -1,4 +1,6 @@
-import { GridColDef } from '@mui/x-data-grid';
+import { GridColDef, GridCellParams } from '@mui/x-data-grid';
+import { IconButton } from '@mui/material';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
 
 // Used in DataTable for displaying products.
 const productColumns: GridColDef[] = [
@@ -38,6 +40,28 @@ const productColumns: GridColDef[] = [
     headerName: 'Methodology',
     type: 'string',
     width: 120,
+  },
+  {
+    field: 'edit',
+    renderHeader: () => <></>,
+    hideSortIcons: true,
+    width: 10,
+    renderCell: (params: GridCellParams) => (
+      <IconButton onClick={() => params.row.onEditClick(params.row.id)}>
+        <EditIcon />
+      </IconButton>
+    ),
+  },
+  {
+    field: 'delete',
+    renderHeader: () => <></>,
+    hideSortIcons: true,
+    width: 10,
+    renderCell: (params: GridCellParams) => (
+      <IconButton onClick={() => params.row.onDeleteClick(params.row.id)}>
+        <DeleteIcon />
+      </IconButton>
+    ),
   },
 ];
 

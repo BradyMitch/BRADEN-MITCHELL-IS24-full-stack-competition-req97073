@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material';
 import { PageLayout } from 'layouts';
-import { DataTable, productColumns } from 'components';
+import { DataTable, ProductsTableHeader, productColumns } from 'components';
 import useProductsService from 'services/useProductsService';
 import { ProductState } from 'services/productsReducer';
 import React, { useState, useEffect } from 'react';
@@ -17,7 +17,7 @@ const sx = {
 };
 
 const LandingPage = () => {
-  const { state: productsState, getProducts } = useProductsService();
+  const { state: productsState, getProducts, removeProduct } = useProductsService();
   const [products, setProducts] = useState(productsState);
 
   // Get products on component mount.
@@ -36,15 +36,28 @@ const LandingPage = () => {
       scrumMasterName: product.scrumMasterName,
       startDate: product.startDate,
       methodology: product.methodology,
+      onEditClick,
+      onDeleteClick: removeProduct,
     }));
     setProducts(rowProducts);
   }, [productsState]);
+
+  const onAddClick = () => {
+    //
+  };
+
+  const onEditClick = (productId: number) => {
+    //
+  };
 
   return (
     <Stack sx={sx.landingPage}>
       <Box sx={sx.section}>
         <PageLayout>
-          <DataTable cols={productColumns} rows={products} />
+          <Stack spacing="5px">
+            <ProductsTableHeader onAddClick={onAddClick} />
+            <DataTable cols={productColumns} rows={products} pageSize={8} height={526} />
+          </Stack>
         </PageLayout>
       </Box>
     </Stack>

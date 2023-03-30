@@ -40,7 +40,7 @@ export const reducer = (
       return [...state, action.payload as ProductState];
     case REMOVE_PRODUCT:
       // Remove a product with the matching productId and return the updated state.
-      return state.filter((product) => product.productId !== action.payload?.productId);
+      return state.filter((product) => product.productId !== (action.payload as unknown as number));
     case EDIT_PRODUCT:
       // Find a product with the matching productId and update its properties with the payload,
       // then return the updated state.
