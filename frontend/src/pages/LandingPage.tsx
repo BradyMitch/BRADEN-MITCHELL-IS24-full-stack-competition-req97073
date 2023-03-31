@@ -11,6 +11,7 @@ import {
 import useProductsService from 'services/useProductsService';
 import { ProductsState, ProductState } from 'services/productsReducer';
 import React, { useState, useEffect } from 'react';
+import { GridColumnHeaderParams } from '@mui/x-data-grid';
 
 const sx = {
   landingPage: { marginTop: '6.5vh' },
@@ -49,16 +50,18 @@ const LandingPage = () => {
   const [addProductModalOpen, setAddProductModalOpen] = useState<boolean>(false);
   const [products, setProducts] = useState<ProductsState>(productsState);
   const [productRowToEdit, setProductRowToEdit] = useState<IProductRow | undefined>(undefined);
+  const [filterByField, setFilterByField] = useState<string>('');
+  const [filterInput, setFilterInput] = useState<string>('');
 
   // Get products on component mount.
   useEffect(() => {
     getProducts();
   }, []);
 
-  // Update products when productsState changes.
+  // Update products when productsState or filterInput changes.
   useEffect(() => {
     // Format the rows.
-    const rowProducts = productsState.map((product: ProductState) => ({
+    let rowProducts = productsState.map((product: ProductState) => ({
       id: product.productId,
       productName: product.productName,
       productOwnerName: product.productOwnerName,
@@ -69,8 +72,15 @@ const LandingPage = () => {
       onEditClick,
       onDeleteClick: removeProduct,
     }));
+
+    // Filter the displayed products.
+    if (filterInput !== '')
+      rowProducts = rowProducts.filter((product: any) =>
+        product[filterByField].includes(filterInput),
+      );
+
     setProducts(rowProducts);
-  }, [productsState]);
+  }, [productsState, filterInput]);
 
   // Open Edit modal and set edit product state.
   const onEditClick = (row: IProductRow) => {
@@ -90,13 +100,33 @@ const LandingPage = () => {
     setAddProductModalOpen(false);
   };
 
+  // Set filter to clicked column.
+  const handleColumnHeaderClick = (params: GridColumnHeaderParams) => {
+    setFilterInput('');
+    if (params.field === 'id') {
+      setFilterInput('');
+      return;
+    }
+    setFilterByField(params.field);
+  };
+
   return (
     <Stack sx={sx.landingPage}>
       <Box sx={sx.section}>
         <PageLayout>
           <Stack spacing="5px">
-            <ProductsTableHeader onAddClick={() => setAddProductModalOpen(true)} />
-            <DataTable cols={productColumns} rows={products} pageSize={8} height={526} />
+            <ProductsTableHeader
+              onAddClick={() => setAddProductModalOpen(true)}
+              filterByField={filterByField}
+              setFilterInput={setFilterInput}
+            />
+            <DataTable
+              cols={productColumns}
+              rows={products}
+              pageSize={8}
+              height={526}
+              onColumnHeaderClick={handleColumnHeaderClick}
+            />
           </Stack>
           <Modal
             title="Edit Product"
