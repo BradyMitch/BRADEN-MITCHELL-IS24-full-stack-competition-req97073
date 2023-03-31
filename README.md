@@ -5,6 +5,7 @@ IS24 Full Stack Competition Submission by Braden Mitchell
 ## Table of Contents
 
 - [Quick Start Guide](#quick-start-guide)
+
 - [Code Challenge Details as Posted By BCGov](#code-challenge-details-as-posted-by-bcgov)
   - [Instructions](#instructions)
   - [What to Submit](#what-to-submit)
@@ -23,12 +24,14 @@ IS24 Full Stack Competition Submission by Braden Mitchell
 
 ## Quick Start Guide
 
-1. Clone the repository and change directory into the `BRADEN-MITCHELL-IS24-full-stack-competition-req97073/` directory.
+1. Clone the repository and change directory into `BRADEN-MITCHELL-IS24-full-stack-competition-req97073/`.
 2. Install dependencies by executing `npm run init`.
 3. Start the servers by executing `npm run up`.
 4. Open your browser and follow links to [Frontend](http://localhost:8000) or [Backend](http://localhost:8008).
 
 <br />
+
+[Return to Top](#citz-imb-product-catalog)
 
 ---
 
@@ -65,6 +68,8 @@ In order to move forward to the next part of the competition you must demonstrat
 
 - BONUS Swagger Documentation that allows a developer with no knowledge of your Web Application API to integrate with the endpoints that you have developed
 
+[Return to Top](#citz-imb-product-catalog)
+
 ---
 
 ### What to Submit
@@ -80,6 +85,8 @@ Your working solution should be present on the main branch of the repository. Pl
 Your submission to the marking panel should come in the form of a link to the repository you have created with your working solution.
 
 Please send the final copy of your solution via a link to your repository in an email [christie.spiteri@gov.bc.ca](mailto:christie.spiteri@gov.bc.ca) .
+
+[Return to Top](#citz-imb-product-catalog)
 
 <br />
 
@@ -124,6 +131,8 @@ Your API should include at minimum the following functionality:
 
 Pre-populate a JSON object within your solution with up to 40 sample products. This will not be provided for your solution. Use of a random generator is encouraged.
 
+[Return to Top](#citz-imb-product-catalog)
+
 <br />
 
 ### BONUS - Swagger Documentation
@@ -131,6 +140,8 @@ Pre-populate a JSON object within your solution with up to 40 sample products. T
 All API endpoints that created in order to develop the required frontend application functionality should be documented via Swagger.
 
 The Swagger documentation should be consumed by anyone building the product on their local workstation at http://localhost:3000/api/api-docs.
+
+[Return to Top](#citz-imb-product-catalog)
 
 <br />
 
@@ -142,6 +153,8 @@ This component should be comprised of a basic table or data table that displays 
 
 **BONUS** Two user stories outlining a search on data that is present in the basic table will be asked.
 
+[Return to Top](#citz-imb-product-catalog)
+
 <br />
 
 ### Code Challenge Context
@@ -152,6 +165,8 @@ Product owners have expressed the desire to communicate to the branch where thes
 
 The user base for this application will include a wide array of technical skills, therefore making this application as simple as possible to display, create and edit information is being stressed by the IMB Senior Leadership Team (SLT).
 
+[Return to Top](#citz-imb-product-catalog)
+
 <br />
 
 ### Personas
@@ -161,6 +176,8 @@ Lisa A director within IMB that is fairly new to the branch, but has worked with
 Alan A DevOps resource that has worked for IMB for the last 3 Years. He has worked on many products, including from inception to maintenance lifecycles for IMB, setting up deployment pipelines and integrating technologies into products that help increase developer velocity. He actively engages the developer community to understand their ever changing needs from product to product. Alan is currently looking to build a tool that allows product owners/stakeholders within IMB to understand resource utilization across all products within IMB to help avoid developer/resource burn-out.
 
 Both IMB Employees are looking for a tool that offers all users within IMB easily digestible data based on the breadth and depth of the many products they currently develop and maintain, as well as products that are on the horizon for IMB. Displaying exactly the right amount of information at a glance is paramount to both Lisa and Alan.
+
+[Return to Top](#citz-imb-product-catalog)
 
 <br />
 
@@ -259,6 +276,8 @@ Acceptance Criteria
 - I can see a total number of all products the Developer being searched for is working on
 - Only products where the developer is assigned to are shown
 
+[Return to Top](#citz-imb-product-catalog)
+
 <br />
 
 ### Assessment Scoring
@@ -337,5 +356,7 @@ _**Frontend Component**_
 <!--EndFragment-->
 </body>
 </html>
+
+[Return to Top](#citz-imb-product-catalog)
 
 <br /><br />
