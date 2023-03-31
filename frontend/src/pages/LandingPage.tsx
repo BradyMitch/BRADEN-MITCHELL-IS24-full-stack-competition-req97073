@@ -164,30 +164,32 @@ const LandingPage = () => {
             width="450px"
           >
             <Box sx={{ marginLeft: '15px', marginRight: '15px', marginBottom: '15px' }}>
-              <Stack direction="row" spacing="5px">
-                <Typography color="var(--dark-gray)">Product ID:</Typography>
-                <Typography>{productIdToDelete}</Typography>
-              </Stack>
-              <Stack direction="row" spacing="5px">
-                <Typography color="var(--dark-gray)">Product Name:</Typography>
-                <Typography>{products[productIdToDelete ?? 0].productName}</Typography>
-              </Stack>
-              <Divider />
-              <Box sx={{ height: '15px' }} />
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                {productIdToDelete && (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      removeProduct(productIdToDelete);
-                      setDeleteProductModalOpen(false);
-                    }}
-                  >
-                    PERMANENTLY DELETE
-                  </Button>
-                )}
-              </Box>
+              {productIdToDelete && (
+                <>
+                  <Stack direction="row" spacing="5px">
+                    <Typography color="var(--dark-gray)">Product ID:</Typography>
+                    <Typography>{productIdToDelete}</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing="5px">
+                    <Typography color="var(--dark-gray)">Product Name:</Typography>
+                    <Typography>{products[productIdToDelete].productName}</Typography>
+                  </Stack>
+                  <Divider />
+                  <Box sx={{ height: '15px' }} />
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => {
+                        removeProduct(productIdToDelete);
+                        setDeleteProductModalOpen(false);
+                      }}
+                    >
+                      PERMANENTLY DELETE
+                    </Button>
+                  </Box>
+                </>
+              )}
             </Box>
           </Modal>
         </PageLayout>
