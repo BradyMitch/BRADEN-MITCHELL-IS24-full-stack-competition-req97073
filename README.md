@@ -23,7 +23,7 @@ IS24 Full Stack Competition Submission by Braden Mitchell
 
 ## Quick Start Guide
 
-1. Clone the repository and change directory into the `BRADEN-MITCHELL-IS24-full-stack-competition-req97073/` directory.
+1. Clone the repository and change directory into `BRADEN-MITCHELL-IS24-full-stack-competition-req97073/`.
 2. Install dependencies by executing `npm run init`.
 3. Start the servers by executing `npm run up`.
 4. Open your browser and follow links to [Frontend](http://localhost:8000) or [Backend](http://localhost:8008).
