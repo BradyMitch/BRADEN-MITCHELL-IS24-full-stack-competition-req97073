@@ -3,7 +3,6 @@ import HttpError from './HttpError';
 
 /**
  * Wraps a route handler (controller) function with error handling logic.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param {Function} handler - The route handler function to wrap.
  * @returns {Function} A new middleware function that wraps the route handler in a try-catch block.
  */

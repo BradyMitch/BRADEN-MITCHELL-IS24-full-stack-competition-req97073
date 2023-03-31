@@ -13,7 +13,6 @@ interface IDataTable {
 
 /**
  * Reusable component to display json data in a table.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param props
  * @param {GridColDef[]} props.cols - Definitions of the table columns.
  * @param {object[]} props.rows - Definitions of the table rows.

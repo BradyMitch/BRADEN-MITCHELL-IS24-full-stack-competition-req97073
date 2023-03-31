@@ -16,7 +16,6 @@ export interface Product {
 
 /**
  * Get all products from the data file.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @returns {Promise<Product[]>} A promise that resolves with an array of products.
  */
 export const getProducts = (): Promise<Product[]> => {
@@ -38,7 +37,6 @@ export const getProducts = (): Promise<Product[]> => {
 
 /**
  * Save products to the data file.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param {Product[]} products - An array of products to be saved.
  * @returns {Promise<void>} A promise that resolves with no value.
  */
@@ -56,7 +54,6 @@ const saveProducts = (products: Product[]): Promise<void> => {
 
 /**
  * Add a product to the data file.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param {Product} product - The product to be added.
  * @returns {Promise<void>} A promise that resolves with no value.
  */
@@ -68,7 +65,6 @@ export const addProduct = async (product: Product): Promise<void> => {
 
 /**
  * Remove a product from the data file.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param {number} productId - The ID of the product to be removed.
  * @returns {Promise<void>} A promise that resolves with no value.
  * @throws {HttpError} If the product with the specified ID is not found.
@@ -83,7 +79,6 @@ export const removeProduct = async (productId: number): Promise<void> => {
 
 /**
  * Replace a product in the data file.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param {number} productId - The ID of the product to be replaced.
  * @param {Product} updatedProduct - The updated product object to replace the existing one.
  * @returns {Promise<void>} A promise that resolves with no value.

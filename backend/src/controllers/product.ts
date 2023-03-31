@@ -2,11 +2,15 @@ import { Request, Response } from 'express';
 import { errorWrapper, productManager } from '../utils';
 import { Product } from '../utils/productManager';
 
-const { getProducts, addProduct, removeProduct, replaceProduct } = productManager;
+const {
+  getProducts,
+  addProduct,
+  removeProduct,
+  replaceProduct: replaceProductInManager,
+} = productManager;
 
 /**
  * Get all products.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method GET
  * @route /api/products
  */
@@ -21,7 +25,6 @@ export const getAllProducts = errorWrapper(async (req: Request, res: Response) =
 
 /**
  * Add new product.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method POST
  * @route /api/products
  */
@@ -44,7 +47,6 @@ export const addNewProduct = errorWrapper(async (req: Request, res: Response) =>
 
 /**
  * Remove a product by ID.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method DELETE
  * @route /api/products/{productId}
  */
@@ -66,7 +68,6 @@ export const removeExistingProduct = errorWrapper(async (req: Request, res: Resp
 
 /**
  * Edit product with ID.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method PATCH
  * @route /api/products/{productId}
  */
@@ -87,8 +88,31 @@ export const editProduct = errorWrapper(async (req: Request, res: Response) => {
   );
   const oldProduct = products.find((product) => product.productId === Number(productId));
   const newProduct = { ...oldProduct, ...filteredReqBody };
-  await replaceProduct(Number(productId), newProduct as Product);
+  await replaceProductInManager(Number(productId), newProduct as Product);
 
   // Send new product JSON.
   res.status(201).json(newProduct); // SUCCESS
+});
+
+// #################################################################################
+
+/**
+ * Replace product with ID.
+ * (NOT USED IN FRONTEND IMPLEMENTATION - PATCH IS PREFERRED)
+ * @method PUT
+ * @route /api/products/{productId}
+ */
+export const replaceProduct = errorWrapper(async (req: Request, res: Response) => {
+  const productId = req.params.productId;
+
+  // Verify request parameter productId exists and is a number.
+  if (!productId || isNaN(Number(productId))) {
+    res.status(400).send('Missing or malformed parameter "productId" in request path.'); // BAD REQUEST
+    return;
+  }
+
+  await replaceProductInManager(Number(productId), req.body as Product);
+
+  // Send new product JSON.
+  res.status(201).json(req.body); // SUCCESS
 });

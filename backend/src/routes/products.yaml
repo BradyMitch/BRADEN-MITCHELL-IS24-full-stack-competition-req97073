@@ -39,10 +39,46 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
   /products/{productId}:
+    put:
+      tags:
+        - Products
+      summary: Replace product by ID. (NOT USED IN FRONTEND IMPLEMENTATION - PATCH IS PREFERRED)
+      operationId: replaceProduct
+      parameters:
+        - in: path
+          name: productId
+          description: ID of the product to replace.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: Product not found.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Product with ID {productId} was not found.
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     patch:
       tags:
         - Products
-      summary: Edit product with ID.
+      summary: Edit product by ID.
       operationId: editProduct
       parameters:
         - in: path
