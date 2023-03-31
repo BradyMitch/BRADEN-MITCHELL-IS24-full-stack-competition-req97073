@@ -172,7 +172,7 @@ const LandingPage = () => {
                   </Stack>
                   <Stack direction="row" spacing="5px">
                     <Typography color="var(--dark-gray)">Product Name:</Typography>
-                    <Typography>{products[productIdToDelete].productName}</Typography>
+                    <Typography>{products[productIdToDelete]?.productName ?? ''}</Typography>
                   </Stack>
                   <Divider />
                   <Box sx={{ height: '15px' }} />
