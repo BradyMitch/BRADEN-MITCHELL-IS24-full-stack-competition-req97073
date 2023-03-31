@@ -47,7 +47,7 @@ const productColumns: GridColDef[] = [
     hideSortIcons: true,
     width: 10,
     renderCell: (params: GridCellParams) => (
-      <IconButton onClick={() => params.row.onEditClick(params.row.id)}>
+      <IconButton onClick={() => params.row.onEditClick(params.row)}>
         <EditIcon />
       </IconButton>
     ),

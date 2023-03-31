@@ -1,8 +1,15 @@
 import { Box, Stack } from '@mui/material';
 import { PageLayout } from 'layouts';
-import { DataTable, ProductsTableHeader, productColumns } from 'components';
+import {
+  AddProductForm,
+  DataTable,
+  EditProductForm,
+  Modal,
+  ProductsTableHeader,
+  productColumns,
+} from 'components';
 import useProductsService from 'services/useProductsService';
-import { ProductState } from 'services/productsReducer';
+import { ProductsState, ProductState } from 'services/productsReducer';
 import React, { useState, useEffect } from 'react';
 
 const sx = {
@@ -16,9 +23,32 @@ const sx = {
   },
 };
 
+interface IProductRow {
+  id: number;
+  productName: string;
+  productOwnerName: string;
+  developers: string;
+  scrumMasterName: string;
+  startDate: string;
+  methodology: string;
+  onEditClick: Function;
+  onDeleteClick: Function;
+}
+
 const LandingPage = () => {
-  const { state: productsState, getProducts, removeProduct } = useProductsService();
-  const [products, setProducts] = useState(productsState);
+  const {
+    state: productsState,
+    getProducts,
+    addProduct,
+    removeProduct,
+    editProduct,
+  } = useProductsService();
+
+  // State.
+  const [editProductModalOpen, setEditProductModalOpen] = useState<boolean>(false);
+  const [addProductModalOpen, setAddProductModalOpen] = useState<boolean>(false);
+  const [products, setProducts] = useState<ProductsState>(productsState);
+  const [productRowToEdit, setProductRowToEdit] = useState<IProductRow | undefined>(undefined);
 
   // Get products on component mount.
   useEffect(() => {
@@ -42,12 +72,22 @@ const LandingPage = () => {
     setProducts(rowProducts);
   }, [productsState]);
 
-  const onAddClick = () => {
-    //
+  // Open Edit modal and set edit product state.
+  const onEditClick = (row: IProductRow) => {
+    setProductRowToEdit(row);
+    setEditProductModalOpen(true);
   };
 
-  const onEditClick = (productId: number) => {
-    //
+  // Edit product when modal is submitted.
+  const handleEditModalSubmit = (productId: number, product: Partial<ProductState>) => {
+    editProduct(productId, product);
+    setEditProductModalOpen(false);
+  };
+
+  // Add product when modal is submitted.
+  const handleAddModalSubmit = (product: ProductState) => {
+    addProduct(product);
+    setAddProductModalOpen(false);
   };
 
   return (
@@ -55,9 +95,27 @@ const LandingPage = () => {
       <Box sx={sx.section}>
         <PageLayout>
           <Stack spacing="5px">
-            <ProductsTableHeader onAddClick={onAddClick} />
+            <ProductsTableHeader onAddClick={() => setAddProductModalOpen(true)} />
             <DataTable cols={productColumns} rows={products} pageSize={8} height={526} />
           </Stack>
+          <Modal
+            title="Edit Product"
+            open={editProductModalOpen}
+            onClose={() => setEditProductModalOpen(false)}
+            maxHeight={650}
+            width="600px"
+          >
+            <EditProductForm productRow={productRowToEdit} onSubmit={handleEditModalSubmit} />
+          </Modal>
+          <Modal
+            title="Add Product"
+            open={addProductModalOpen}
+            onClose={() => setAddProductModalOpen(false)}
+            maxHeight={650}
+            width="650px"
+          >
+            <AddProductForm onSubmit={handleAddModalSubmit} />
+          </Modal>
         </PageLayout>
       </Box>
     </Stack>

@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import React from 'react';
 
 interface IProductsTableHeader {
@@ -7,14 +7,16 @@ interface IProductsTableHeader {
 
 /**
  * Header above Products table to display actions.
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param props
+ * @param {Function} props.onAddClick - Function called when add btn is clicked.
  */
 const ProductsTableHeader = (props: IProductsTableHeader) => {
   const { onAddClick } = props;
   return (
-    <Stack direction="row-reverse" spacing={1}>
-      <Button onClick={() => onAddClick}>Add New Product</Button>
+    <Stack direction="row-reverse" spacing={1} sx={{ marginBottom: '10px' }}>
+      <Button variant="contained" onClick={() => onAddClick()}>
+        Add New Product
+      </Button>
     </Stack>
   );
 };
