@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import { PageLayout } from 'layouts';
 import {
   AddProductForm,
@@ -48,8 +48,10 @@ const LandingPage = () => {
   // State.
   const [editProductModalOpen, setEditProductModalOpen] = useState<boolean>(false);
   const [addProductModalOpen, setAddProductModalOpen] = useState<boolean>(false);
+  const [deleteProductModalOpen, setDeleteProductModalOpen] = useState<boolean>(false);
   const [products, setProducts] = useState<ProductsState>(productsState);
   const [productRowToEdit, setProductRowToEdit] = useState<IProductRow | undefined>(undefined);
+  const [productIdToDelete, setProductIdToDelete] = useState<number | undefined>(undefined);
   const [filterByField, setFilterByField] = useState<string>('');
   const [filterInput, setFilterInput] = useState<string>('');
 
@@ -70,7 +72,7 @@ const LandingPage = () => {
       startDate: product.startDate,
       methodology: product.methodology,
       onEditClick,
-      onDeleteClick: removeProduct,
+      onDeleteClick,
     }));
 
     // Filter the displayed products.
@@ -86,6 +88,12 @@ const LandingPage = () => {
   const onEditClick = (row: IProductRow) => {
     setProductRowToEdit(row);
     setEditProductModalOpen(true);
+  };
+
+  // Open Delete modal and set delete product id state.
+  const onDeleteClick = (productId: number) => {
+    setProductIdToDelete(productId);
+    setDeleteProductModalOpen(true);
   };
 
   // Edit product when modal is submitted.
@@ -128,6 +136,7 @@ const LandingPage = () => {
               onColumnHeaderClick={handleColumnHeaderClick}
             />
           </Stack>
+          {/* EDIT MODAL */}
           <Modal
             title="Edit Product"
             open={editProductModalOpen}
@@ -137,6 +146,7 @@ const LandingPage = () => {
           >
             <EditProductForm productRow={productRowToEdit} onSubmit={handleEditModalSubmit} />
           </Modal>
+          {/* ADD MODAL */}
           <Modal
             title="Add Product"
             open={addProductModalOpen}
@@ -145,6 +155,40 @@ const LandingPage = () => {
             width="650px"
           >
             <AddProductForm onSubmit={handleAddModalSubmit} />
+          </Modal>
+          {/* DELETE MODAL */}
+          <Modal
+            title="Delete Product Confirmation"
+            open={deleteProductModalOpen}
+            onClose={() => setDeleteProductModalOpen(false)}
+            width="450px"
+          >
+            <Box sx={{ marginLeft: '15px', marginRight: '15px', marginBottom: '15px' }}>
+              <Stack direction="row" spacing="5px">
+                <Typography color="var(--dark-gray)">Product ID:</Typography>
+                <Typography>{productIdToDelete}</Typography>
+              </Stack>
+              <Stack direction="row" spacing="5px">
+                <Typography color="var(--dark-gray)">Product Name:</Typography>
+                <Typography>{products[productIdToDelete ?? 0].productName}</Typography>
+              </Stack>
+              <Divider />
+              <Box sx={{ height: '15px' }} />
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                {productIdToDelete && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      removeProduct(productIdToDelete);
+                      setDeleteProductModalOpen(false);
+                    }}
+                  >
+                    PERMANENTLY DELETE
+                  </Button>
+                )}
+              </Box>
+            </Box>
           </Modal>
         </PageLayout>
       </Box>
