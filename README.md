@@ -5,6 +5,7 @@ IS24 Full Stack Competition Submission by Braden Mitchell
 ## Table of Contents
 
 - [Quick Start Guide](#quick-start-guide)
+
 - [Code Challenge Details as Posted By BCGov](#code-challenge-details-as-posted-by-bcgov)
   - [Instructions](#instructions)
   - [What to Submit](#what-to-submit)
