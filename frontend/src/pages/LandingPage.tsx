@@ -164,7 +164,7 @@ const LandingPage = () => {
             width="450px"
           >
             <Box sx={{ marginLeft: '15px', marginRight: '15px', marginBottom: '15px' }}>
-              {productIdToDelete && (
+              {productIdToDelete !== undefined && (
                 <>
                   <Stack direction="row" spacing="5px">
                     <Typography color="var(--dark-gray)">Product ID:</Typography>
